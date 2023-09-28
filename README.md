@@ -125,12 +125,11 @@ To test your composer installation just run composer at the command line:
 ```                     
 $ composer
 ```
+
 ### Installing extra packages for Laravel
 ```
 sudo apt install php-mbstring php-xml php-bcmath php-curl
 ```
-
-(mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ### Get the project from GitHub
 Change your local directory to where you want to install the Laravel application.
@@ -236,5 +235,5 @@ cd <path>/dept_groups
 php artisan serve
 ```
 
-Go to localhost:8000 
+With a browser (e.g. Chromium), go to localhost:8000 
 you should see the table.
