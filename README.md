@@ -7,60 +7,241 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Manage Department Groups
+Managing Department Groups is one of the functionalities of the White Pages System. This allows for administrators to edit and delete existing Department Groups.
+As of 9/27/2023, Manage Department Groups is capable of listing and filtering records. The Edit and Delete functionalities have yet to be implemented.
+## Dependencies
+The environment setup:
+```
+sudo apt install build-essential
+sudo apt install geany
+sudo apt install openjdk-17-jdk
+sudo apt install chromium-browser
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Use nvm and Node.js
+```
+sudo apt install curl  
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+source ~/.bashrc
+nvm list-remote
+nvm install 18.18.0
+nvm use 18.18.0
+node -v
+npm -v
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Installing MySQL
+Let's install the MySQL server. Start with the following command:
+                  
+```
+sudo apt install mysql-server                        
+```                                    
+This should start the mysqld service running. But, if you get a message that the service is not running, you can start it with:
+```                  
+sudo systemctl start mysql.service                      
+```                     
+                  
+To fix the root password, you can start by running the following:
+```
+sudo mysql                     
+```                     
+                  
+At the mysql> prompt do the following to set the root password to 'mysql.nimd@' (choose your own password):
+```                  
+mysql> alter user 'root'@'localhost' identified with mysql_native_password by 'mysql.nimd@';
+Query OK, 0 rows affected (0.00 sec)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+mysql> exit
+Bye
+```                   
+                     
+                  
+Now run the following command:
 
-## Learning Laravel
+```                    
+sudo mysql_secure_installation
+```
+Type 'n' for the validate password plugin and for changing the password for root. Type 'y' for the rest of the prompts. Now, you can login as the root user and create a regular user for accessing a database.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Installing PHP
+```
+sudo apt install php8.1-fpm php-mysql
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Installing Composer
+To install Composer install the following packages:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```                     
+sudo apt install php-cli unzip
+```               
+                  
+Go to your home directory and run the following curl command:
 
-## Laravel Sponsors
+```                 
+cd ~
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php                         
+```                  
+Then run the following to help with a verification step:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```                     
+HASH=`curl -sS https://composer.github.io/installer.sig`                     
+```                    
+                  
+To test that you obtained a value you can run:
 
-### Premium Partners
+```                    
+echo $HASH                   
+```                    
+                  
+You will see a long hex string as the output. Now, run the following command:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```                    
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"                   
+```                    
+                  
+You should see
+Installer verified
 
-## Contributing
+If the output says Installer corrupt, you’ll need to download the installation script again and double check that you’re using the correct hash. Then, repeat the verification process. When you have a verified installer, you can continue.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+With the installer verified, we can install composer globally as a system-side command named composer inside of /usr/local/bin:
 
-## Code of Conduct
+```                     
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer                                          
+```                  
+You should see the following output:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+                     
+All settings correct for using Composer
+Downloading...
 
-## Security Vulnerabilities
+Composer (version 2.6.3) successfully installed to: /usr/local/bin/composer
+Use it: php /usr/local/bin/composer                       
+                     
+                  
+To test your composer installation just run composer at the command line:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```                     
+$ composer
+```
+(the output would start as shown below)
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version 2.6.3 2023-09-15 09:38:21
+### Installing extra packages for Laravel
+```
+sudo apt install php-mbstring php-xml php-bcmath php-curl
+```
 
-## License
+(mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Get the project from GitHub
+Change your local directory to where you want to install the Laravel application.
+```
+$ git clone https://github.com/UHWPMS/dept_groups.git
+
+```
+### Create a regular user for the database
+
+```
+mysql -u root -p
+mysql> create database white_pages;ge
+mysql> create user 'tarynet'@'localhost' identified by 'tarynpass';
+mysql> grant all privileges on white_pages2.* to 'tarynet'@'localhost';
+mysql> exit
+
+cd <path>/dept_groups
+ls (check for init.sql, add_test_data.sql and reload.sql)
+
+mysql -u tarynet -p white_pages
+mysql> \. reload.sql
+you should see  13 records then 8 records inserted.
+mysql> exit
+```
+### Create an .env file
+```
+cd <path>/dept_groups
+geany .env 
+```
+
+Copy the following contents into the .env file. Adjust as needed for your own database name, username and password.
+```
+APP_NAME=white_pages
+APP_ENV=development
+APP_KEY=base64:GKpfzVt+tOvQVZd/3+qANuQ1e44EbR0LHYxCd9lLDhA=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=white_pages
+DB_USERNAME=tarynet
+DB_PASSWORD=tarynpass
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_APP_NAME="${APP_NAME}"
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
+### Change the write permissions
+```
+cd <path>/dept_groups
+sudo chmod -R 777 storage
+sudo chmod -R 777 bootstrap/cache
+```
+### Run the program
+
+```
+cd <path>/dept_groups
+php artisan serve
+```
+Go to localhost:8000 
+you should see the table.
