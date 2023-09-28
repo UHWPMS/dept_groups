@@ -141,9 +141,9 @@ $ git clone https://github.com/UHWPMS/dept_groups.git
 
 ```
 mysql -u root -p
-mysql> create database white_pages;ge
+mysql> create database white_pages;
 mysql> create user 'tarynet'@'localhost' identified by 'tarynpass';
-mysql> grant all privileges on white_pages2.* to 'tarynet'@'localhost';
+mysql> grant all privileges on white_pages.* to 'tarynet'@'localhost';
 mysql> exit
 
 cd <path>/dept_groups
