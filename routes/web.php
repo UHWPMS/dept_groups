@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   $group_names = DB::select('select * from WP_DEPT_GRP');
+    return view('white_pages', ['group_names' => $group_names]);
 });
