@@ -125,14 +125,6 @@ To test your composer installation just run composer at the command line:
 ```                     
 $ composer
 ```
-(the output would start as shown below)
-   ______
-  / ____/___  ____ ___  ____  ____  ________  _____
- / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
-/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
-\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
-                    /_/
-Composer version 2.6.3 2023-09-15 09:38:21
 ### Installing extra packages for Laravel
 ```
 sudo apt install php-mbstring php-xml php-bcmath php-curl
@@ -243,5 +235,6 @@ sudo chmod -R 777 bootstrap/cache
 cd <path>/dept_groups
 php artisan serve
 ```
+
 Go to localhost:8000 
 you should see the table.
