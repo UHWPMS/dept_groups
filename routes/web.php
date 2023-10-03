@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-   $group_names = DB::select('select * from WP_DEPT_GRP');
-    return view('white_pages', ['group_names' => $group_names]);
-});
+//Route::get('/', function () {
+//   $group_names = DB::select('select * from WP_DEPT_GRP');
+//    return view('white_pages', ['group_names' => $group_names]);
+//});
+Route::get('/{any?}', [
+    function () {
+        return view('welcome');
+    }
+])->where('any', '.*');
