@@ -1,15 +1,8 @@
-require('./bootstrap');
-require('../sass/app.scss')
-import Vue from 'vue'
+import './bootstrap';
 
-window.Vue = require('vue');
+import { createApp } from 'vue/dist/vue.esm-bundler';
+import ExampleComponent from './components/ExampleComponent.vue';
 
-// router
-import router from './routes.js';
-window.router = router;
-window.Fire = new Vue();
-
-const app = new Vue({
-    el: '#app',
-    router,
-}).$mount('#app');
+createApp({
+    components: {ExampleComponent, }
+}).mount("#app");
