@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  larvel:
+    image: dept_groups
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=white_pages
+      - DB_USERNAME=tarynet
+      - DB_PASSWORD=tarynpass
+
+    networks:
+      - app-network
+    command: php artisan serve --host=0.0.0.0
+
+
+  # MySQL container
+  mysql:
+    image: mysql:8.0.34
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql.nimd@
+      MYSQL_DATABASE: white_pages
+      MYSQL_USER: tarynet
+      MYSQL_PASSWORD: tarynpass
+    volumes:
+      - ./sqlscripts/reload.sql:/docker-entrypoint-initdb.d/reload.sql
+      - ./sqlscripts/add_test_data.sql:/script/add_test_data.sql
+      - ./sqlscripts/init.sql:/script/init.sql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
