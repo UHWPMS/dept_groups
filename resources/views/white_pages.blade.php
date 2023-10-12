@@ -13,7 +13,7 @@
 
          .table-padding {
             padding-top: 30px;
-            padding: 0 110px;
+            padding: 0 90px;
          }
          .center-table {
             margin: 0 auto;
