@@ -47,7 +47,7 @@ To fix the root password, you can start by running the following:
 sudo mysql                     
 ```                     
                   
-At the mysql> prompt do the following to set the root password to 'mysql.nimd@' (choose your own password):
+At the mysql> prompt do the following to set the root password to 'mysql.nimd@' (This is just an example password. Remember to change 'mysql.nimd@' to your own password):
 ```                  
 mysql> alter user 'root'@'localhost' identified with mysql_native_password by 'mysql.nimd@';
 Query OK, 0 rows affected (0.00 sec)
