@@ -140,7 +140,7 @@ Use it: php /usr/local/bin/composer
 To test your composer installation just run composer at the command line:
 
 ```                     
-$ composer
+composer
 ```
 
 ### Installing extra packages for Laravel
@@ -151,7 +151,7 @@ sudo apt install php-mbstring php-xml php-bcmath php-curl
 ### Get the project from GitHub
 Change your local directory to where you want to install the Laravel application.
 ```
-$ git clone https://github.com/UHWPMS/dept_groups.git
+git clone https://github.com/UHWPMS/dept_groups.git
 
 ```
 If 'git' gives you error, use the following to install git then clone it again:
