@@ -65,6 +65,23 @@ sudo mysql_secure_installation
 Type 'n' for the validate password plugin and for changing the password for root. Type 'y' for the rest of the prompts. Now, you can login as the root user and create a regular user for accessing a database.
 
 ### Installing PHP
+Since php8.1-fpm may not be avaliable for everyone, please do the following commands before intall it.
+```
+sudo apt update
+apt search php | grep fpm
+sudo apt install php8.1-fpm php-mysql
+```
+The second command above is using for searching which version is avaliable on the system. You need to make sure your PHP version is 8.1 or higher in order to continue otherwise you will run into errors later. 
+
+If PHP is lower than 8.1, do the following commands:
+```
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php8.1
+```
+Then install php8.1-fpm with the following:
 ```
 sudo apt install php8.1-fpm php-mysql
 ```
@@ -137,6 +154,11 @@ Change your local directory to where you want to install the Laravel application
 $ git clone https://github.com/UHWPMS/dept_groups.git
 
 ```
+If 'git' gives you error, use the following to install git then clone it again:
+```
+sudo apt install git
+git clone https://github.com/UHWPMS/dept_groups.git
+```
 ### Create a regular user for the database
 
 ```
@@ -146,7 +168,7 @@ mysql> create user 'tarynet'@'localhost' identified by 'tarynpass';
 mysql> grant all privileges on white_pages.* to 'tarynet'@'localhost';
 mysql> exit
 
-cd <path>/dept_groups
+cd <path>/dept_groups (replace <path> with your path to the 'dept_groups' directory)
 ls (check for init.sql, add_test_data.sql and reload.sql)
 
 mysql -u tarynet -p white_pages
