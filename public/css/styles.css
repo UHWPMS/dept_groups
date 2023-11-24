@@ -1,0 +1,15 @@
+/* Position the search bar */
+.dataTables_filter {
+    text-align: left;
+}
+
+/* Adjust search input styles */
+.dataTables_filter input {
+    margin-right: 10px; /* Add some spacing to the right of the input */
+}
+
+/* Optional: Adjust search label styles */
+.dataTables_filter label {
+    font-weight: bold;
+    color: #333;
+}
